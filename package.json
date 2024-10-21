@@ -1,6 +1,7 @@
 {
   "name": "o11-idx",
   "displayName": "O11 idx",
+  "publisher": "O11",
   "description": "IDX theme clone",
   "version": "0.0.1",
   "engines": {
