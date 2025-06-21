@@ -2,6 +2,10 @@
   "name": "o11-idx",
   "displayName": "O11 idx",
   "publisher": "O11",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/timwm/O11-idx.git"
+  },
   "description": "IDX theme clone",
   "version": "0.0.1",
   "engines": {
