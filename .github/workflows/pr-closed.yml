@@ -1,0 +1,74 @@
+name: 🎉 PR Closed Notification
+
+on:
+  pull_request_target:
+    types:
+      - closed
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  notify-on-merge:
+    # Only run if the PR was merged (not just closed)
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: 💬 Thank Contributor
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const pr = context.payload.pull_request;
+            const author = pr.user.login;
+            const prNumber = pr.number;
+            const prTitle = pr.title;
+            const avatarUrl = pr.user.avatar_url;
+            
+            try {              
+              // Get all PRs from this author
+              const { data: authorPRs } = await github.rest.search.issuesAndPullRequests({
+                q: `repo:${context.repo.owner}/${context.repo.repo} author:${author} is:pr is:merged`,
+                per_page: 100
+              });
+              
+              // Check if this is the author's first contribution
+              const isFirstContribution = authorPRs.total_count <= 1;
+              
+              console.log(`Processing PR #${prNumber} by @${author}`);
+              console.log(`First contribution: ${isFirstContribution}`);
+              
+              // Create a personalized message
+              let message = `![avatar](https://wsrv.nl/?url=${encodeURIComponent(avatarUrl+'&s=16')}&w=16&h=16&fit=cover&mask=circle&mtrim) @${author}! `;
+              
+              if (isFirstContribution) {
+                message += `\n\n🌟 This is your **first merged pull request** to this repository - welcome to the project :wave:! We're excited to have you as a contributor.\n\n`;
+              }
+              
+              message += `Your changes from **"${prTitle}"** have been merged and will be included in the next release.\n\n`;
+              message += `We appreciate your time and effort in making this project better! 🙏`;
+              
+              // Add the comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body: message
+              });
+              
+              console.log(`✅ Commented on PR #${prNumber}`);
+            } catch (error) {
+              console.error(`⚠️ Could not comment on PR #${prNumber}: ${error.message}`);
+            }
+            
+            console.log('📊 Contribution Statistics:');
+            console.log(`  PR: #${pr.number} - ${pr.title}`);
+            console.log(`  Author: @${pr.user.login}`);
+            console.log(`  Files changed: ${pr.changed_files}`);
+            console.log(`  Additions: +${pr.additions}`);
+            console.log(`  Deletions: -${pr.deletions}`);
+            console.log(`  Commits: ${pr.commits}`);
+            console.log(`  Merged by: @${pr.merged_by.login}`);
+            console.log(`  Merged at: ${pr.merged_at}`);
