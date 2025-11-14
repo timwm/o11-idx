@@ -1,0 +1,33 @@
+#!/usr/bin/env sh
+
+COMMIT_MSG_FILE="$1"
+# SOURCE="$2"
+
+# case "$SOURCE" in
+#   message|template)
+#     # User provided -m or used a template → preserve message
+#     ;;
+#   merge|squash|*)
+#     # Merge or squash commit → seed Commitizen with auto-generated title
+#     exec < /dev/tty && node_modules/.bin/cz --hook || true
+#     ;;
+# esac
+
+# Read the first non-comment line of the commit message file
+FIRST_LINE=$(grep -v '^[[:space:]]*#' "$COMMIT_MSG_FILE" | head -n 1)
+
+# If commit message is empty, run Commitizen wizard
+if [ -z "$FIRST_LINE" ]; then
+  echo "Commit message is empty. Launching Commitizen wizard..."
+  exec < /dev/tty && node_modules/.bin/cz --hook || true
+else
+  # Normalize: first line = title, rest = body
+  TITLE=$(head -n1 "$COMMIT_MSG_FILE")
+  BODY=$(tail -n +2 "$COMMIT_MSG_FILE")
+
+  echo "$TITLE" > "$COMMIT_MSG_FILE"
+  if [ -n "$BODY" ]; then
+    echo "" >> "$COMMIT_MSG_FILE"
+    echo "$BODY" >> "$COMMIT_MSG_FILE"
+  fi
+fi

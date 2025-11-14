@@ -1,26 +1,84 @@
 {
-  "name": "o11-idx",
-  "displayName": "O11 idx",
-  "publisher": "O11",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/timwm/O11-idx.git"
-  },
-  "description": "IDX theme clone",
-  "version": "0.0.1",
-  "engines": {
-    "vscode": "^1.94.0"
-  },
-  "categories": [
-    "Themes"
-  ],
-  "contributes": {
-    "themes": [
-      {
-        "label": "O11 IDX",
-        "uiTheme": "vs-dark",
-        "path": "./themes/O11 IDX-color-theme.json"
-      }
-    ]
-  }
+	"name": "o11-idx",
+	"displayName": "O11 IDX",
+	"publisher": "timwm",
+	"license": "GPL-2.0-only",
+	"version": "0.0.1",
+	"icon": "assets/img/icon.png",
+	"galleryBanner": {
+		"color": "#10151d",
+		"theme": "dark"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/timwm/O11-idx.git"
+	},
+	"bugs": {
+		"url": "https://github.com/timwm/O11-idx/issues"
+	},
+	"description": "IDX theme clone for VS Code",
+	"engines": {
+		"vscode": "^1.94.0"
+	},
+	"categories": [
+		"Themes"
+	],
+	"keywords": [
+		"theme",
+		"O11",
+		"IDX",
+		"dark"
+	],
+	"contributes": {
+		"themes": [
+			{
+				"label": "O11 IDX",
+				"uiTheme": "vs-dark",
+				"path": "./themes/O11 IDX-color-theme.json"
+			}
+		]
+	},
+	"type": "module",
+	"scripts": {
+		"build": "pnpm lint && vsce package",
+		"lint": "biome lint",
+		"format": "biome format --write",
+		"publish:vscode": "vsce publish  --packagePath $(find . -iname \"*.vsix\")",
+		"publish:npmjs": "pnpm publish --no-git-checks --access public",
+		"ci:publish": "pnpm publish:vscode && pnpm publish:npmjs -r --no-git-checks",
+		"ci:release": "pnpm build && changeset publish",
+		"version:check": "node scripts/check-versions.js",
+		"commit": "cz",
+		"commitlint": "commitlint --edit",
+		"prepare": "is-ci || husky",
+		"clean": "rm -rf *.vsix .biomecache node_modules",
+		"contributors": "node scripts/generate-release-contributors.js",
+		"contributors:all": "node scripts/generate-release-contributors.js --all",
+		"contributors:latest": "node scripts/generate-release-contributors.js --tag $(git describe --tags --abbrev=0)"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.3.4",
+		"@commitlint/cli": "^20.1.0",
+		"@commitlint/config-conventional": "^20.0.0",
+		"@vscode/vsce": "^3.7.0",
+		"cz-conventional-changelog": "^3.3.0",
+		"husky": "^9.1.7",
+		"is-ci": "^4.1.0",
+		"lint-staged": "^16.2.6"
+	},
+	"lint-staged": {
+		"*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx}": [
+			"biome check --files-ignore-unknown=true",
+			"biome check --write --no-errors-on-unmatched",
+			"biome check --write --assist-enabled=false --no-errors-on-unmatched",
+			"biome check --write --unsafe --no-errors-on-unmatched",
+			"biome format --write --no-errors-on-unmatched",
+			"biome lint --write --no-errors-on-unmatched"
+		]
+	},
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
+	}
 }

@@ -1,2 +1,7 @@
 node_modules
 *.vsix
+
+# Generated contributor files
+release-contributors.md
+release-contributors.json
+release-contributors.html

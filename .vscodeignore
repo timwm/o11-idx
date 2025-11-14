@@ -1,4 +1,38 @@
+# Development files
 .vscode/**
 .vscode-test/**
-.gitignore
+.vscodeignore
 vsc-extension-quickstart.md
+
+# Git files
+.git/**
+.gitattributes
+.gitignore
+.github/**
+
+# Configuration files
+biome.json
+commitlint.config.js
+.release-please-manifest.json
+release-please-config.json
+
+# Dependencies
+node_modules/**
+pnpm-lock.yaml
+
+# Changeset files (for release management)
+.changeset/**
+.husky/**
+
+# Scripts directory (release management)
+scripts/**
+
+# Build artifacts
+*.vsix
+release-contributors.md
+release-contributors.json
+release-contributors.html
+
+# Unused icon variants
+assets/img/*
+!assets/img/icon.png

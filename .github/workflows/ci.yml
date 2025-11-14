@@ -1,0 +1,56 @@
+name: "CI: Lint ・ Test ・ Release"
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [22]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 💾 Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
+
+      - name: 🛠️ Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
+
+      - name: 💾 Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 🔎 Lint and check node versions
+        run: |
+          pnpm run lint
+          pnpm run version:check
+        # run: pnpm test
+
+  release:
+    needs: lint-and-test
+    if: ${{ github.repository == 'timwm/o11-idx' }} && github.event_name == 'push' && contains(github.ref, 'refs/heads/main')
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v4.4.0
+        with:
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
