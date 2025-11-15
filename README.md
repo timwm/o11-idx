@@ -10,28 +10,33 @@
 </p>
 
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=timwm.o11-idx">
-    <img src="https://img.shields.io/visual-studio-marketplace/v/timwm.o11-idx?style=for-the-badge&logo=visual-studio-code&color=a87ffb" alt="Version">
-  </a>
   <!-- <a href="https://marketplace.visualstudio.com/items?itemName=timwm.o11-idx">
     <img src="https://img.shields.io/visual-studio-marketplace/rating/timwm.o11-idx?style=for-the-badge&logo=visual-studio-code&color=ffb870" alt="Rating">
   </a> -->
   <!-- <a href="https://marketplace.visualstudio.com/items?itemName=timwm.o11-idx">
     <img src="https://img.shields.io/visual-studio-marketplace/i/timwm.o11-idx?style=for-the-badge&logo=visual-studio-code&color=70ff87" alt="Installations">
   </a> -->
-  <a href="https://marketplace.visualstudio.com/items?itemName=timwm.o11-idx">
-    <img src="https://img.shields.io/visual-studio-marketplace/d/timwm.o11-idx?style=for-the-badge&color=708fff" alt="Downloads">
-  </a>
-  <a href="https://github.com/timwm/O11-idx/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/timwm/o11-idx?style=for-the-badge&color=17b877" alt="License">
-  </a>
 </p>
+
+<div align="center" style="text-align: center;">
+
+[![Visual Studio Marketplace](https://img.shields.io/visual-studio-marketplace/v/timwm.o11-idx?style=for-the-badge&label=Version&logo=visual-studio-code)](https://marketplace.visualstudio.com/items?itemName=timwm.o11-idx)
+[![Downloads](https://img.shields.io/visual-studio-marketplace/d/timwm.o11-idx?style=for-the-badge&logo=visual-studio-code)](https://marketplace.visualstudio.com/items?itemName=timwm.o11-idx)
+<!-- [![Installs](https://img.shields.io/visual-studio-marketplace/i/timwm.o11-idx?style=for-the-badge&logo=microsoft)](https://marketplace.visualstudio.com/items?itemName=timwm.o11-idx) -->
+[![OpenVSX Registry](https://img.shields.io/open-vsx/dt/timwm/o11-idx?color=purple&label=OpenVSX%20Downloads&style=for-the-badge)](https://open-vsx.org/extension/timwm/o11-idx)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/timwm/o11-idx/ci.yml?branch=main&style=for-the-badge&logo=github)](https://github.com/timwm/o11-idx/actions/workflows/ci.yml)
+[![License](https://img.shields.io/github/license/timwm/o11-idx?style=for-the-badge)](https://github.com/timwm/o11-idx/blob/master/LICENSE)
+
+</div>
 
 <p align="center">Enjoying O11 IDX!, Support the project by staring or become a sponsor on <a href="https://github.com/sponsors/timwm">GitHub Sponsors</a>.</p>
 <p align="center">
   <!-- Sponsor -->
-  <a href="https://github.com/sponsors/timwm">
+  <!-- <a href="https://github.com/sponsors/timwm">
     <img src="https://img.shields.io/badge/%F0%9F%92%96-Sponsor%20me!-ff69b4?style=for-the-badge" alt="Sponsor Me">
+  </a> -->
+  <a href="https://buymeacoffee.com/timwm">
+    <img src="https://img.shields.io/badge/Buy%20Me%20A%20Coffee-☕-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy Me A Coffee">
   </a>
   <a href="https://github.com/timwm/O11-idx/stargazers">
     <img src="https://img.shields.io/github/stars/timwm/o11-idx?style=for-the-badge&color=ffb870" alt="GitHub Stars">
@@ -137,8 +142,6 @@ For the best experience with O11 IDX, I consider using these font settings:
 {
   "editor.fontFamily": "'Cartograph CF', 'JetBrains Mono', 'Fira Code', Inconsolata, 'Source Code Pro Medium', 'Droid Sans Mono', monospace",
   "editor.fontLigatures": true,
-  "editor.fontSize": 14,
-  "editor.lineHeight": 22
 }
 ```
 

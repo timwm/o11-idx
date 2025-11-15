@@ -45,12 +45,14 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: 📦 Package Extension (.vsix)
-        run: pnpm build
+        run: |
+          pnpm build
+          sha256sum *.vsix > `echo *.vsix`.sha256
 
       - name: 📤 Upload VSIX to GitHub Release
         # uses: ncipollo/release-action@v1.20.0
         # with:
-        #   artifacts: "*.vsix"
+        #   artifacts: "*.vsix" "*.vsix.sha256"
         #   token: ${{ secrets.GITHUB_TOKEN }}
         #   allowUpdates: true # ensures we can update the release with assets
         #   replacesArtifacts: false
@@ -59,7 +61,9 @@ jobs:
         uses: softprops/action-gh-release@v2
         if: github.ref_type == 'tag'
         with:
-          files: "*.vsix"
+          files: |
+            *.vsix
+            *.vsix.sha256
 
       - name: 📤 Publish to Open VSX
         uses: HaaLeo/publish-vscode-extension@v2
