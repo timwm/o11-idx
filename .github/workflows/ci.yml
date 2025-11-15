@@ -43,7 +43,11 @@ jobs:
 
   release:
     needs: lint-and-test
-    if: ${{ github.repository == 'timwm/o11-idx' }} && github.event_name == 'push' && contains(github.ref, 'refs/heads/main')
+    if: |
+      github.repository == 'timwm/o11-idx' && 
+      github.event_name == 'push' && 
+      contains(github.ref, 'refs/heads/main') &&
+      github.actor != 'dependabot[bot]'
     permissions:
       contents: write
       issues: write
