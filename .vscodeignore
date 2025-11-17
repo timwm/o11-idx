@@ -35,5 +35,5 @@ release-contributors.json
 release-contributors.html
 
 # Unused icon variants
-assets/img/*
+assets/**
 !assets/img/icon.png
