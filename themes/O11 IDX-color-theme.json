@@ -197,7 +197,7 @@
     "sideBarSectionHeader.border": "#083d44ff",
     "sideBarSectionHeader.foreground": "#d9dfe7",
     "sideBarTitle.foreground": "#d9dfe7",
-    "statusBar.background": "#1f2939", // "#121922",
+    "statusBar.background": "#0f1929", // "#1f2939", // "#121922",
     "statusBar.border": "#333e4f",
     "statusBar.debuggingBackground": "#891524",
     "statusBar.debuggingForeground": "#ffffff",
@@ -246,7 +246,7 @@
     "textLink.foreground": "#b895fd",
     "textPreformat.foreground": "#a4afbd",
     "textSeparator.foreground": "#5d6a7d",
-    "titleBar.activeBackground": "#000410",
+    "titleBar.activeBackground": "#0f1929", // #000410"
     "titleBar.activeForeground": "#d9dfe7",
     "titleBar.border": "#333e4f",
     "titleBar.inactiveBackground": "#10151d",
