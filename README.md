@@ -29,7 +29,7 @@
 
 </div>
 
-<p align="center">Enjoying O11 IDX!, Support the project by staring or become a sponsor on <a href="https://github.com/sponsors/timwm">GitHub Sponsors</a>.</p>
+<p align="center">Enjoying O11 IDX! Support the project by staring or become a sponsor on <a href="https://github.com/sponsors/timwm">GitHub Sponsors</a>.</p>
 <p align="center">
   <!-- Sponsor -->
   <!-- <a href="https://github.com/sponsors/timwm">
