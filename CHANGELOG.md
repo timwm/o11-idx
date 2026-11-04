@@ -4,6 +4,14 @@ All notable changes to the "o11-idx" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## 2.1.0 (2026-11-04)
+
+## What's Changed
+* feat: publish the theme to npm by @timwm in https://github.com/timwm/o11-idx/pull/12
+
+
+**Full Changelog**: https://github.com/timwm/o11-idx/compare/v2.0.11...v2.1.0
+
 ## 2.0.11 (2025-11-17)
 
 **Full Changelog**: https://github.com/timwm/o11-idx/compare/v2.0.1...v2.0.11
