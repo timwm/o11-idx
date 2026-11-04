@@ -16,6 +16,7 @@
   "bugs": {
     "url": "https://github.com/timwm/O11-idx/issues"
   },
+  "homepage": "https://github.com/timwm/o11-idx#readme",
   "description": "A Beautiful VS Code Theme for Developers",
   "engines": {
     "vscode": "^1.94.0"
@@ -38,17 +39,24 @@
       }
     ]
   },
+  "exports": {
+    ".": "./dist/o11-idx-color-theme.json",
+    "./package.json": "./package.json"
+  },
   "type": "module",
   "packageManager": "pnpm@12.16.1",
   "scripts": {
-    "build": "pnpm lint && vsce package",
+    "build": "pnpm lint && pnpm vsix:check && vsce package --no-dependencies",
+    "build:npm-theme": "node scripts/build-npm-theme.js",
+    "prepack": "pnpm build:npm-theme",
     "lint": "biome lint",
     "format": "biome format --write",
     "publish:vscode": "vsce publish --packagePath $npm_package_name-$npm_package_version.vsix",
-    "publish:npmjs": "pnpm publish --no-git-checks --access public",
+    "publish:npmjs": "npm publish --access public",
     "ci:publish": "pnpm publish:vscode && pnpm publish:npmjs",
     "ci:release": "pnpm build && pnpm ci:publish",
     "version:check": "node scripts/check-versions.js",
+    "vsix:check": "node scripts/check-vsix-contents.js",
     "commit": "cz",
     "commitlint": "commitlint --edit",
     "prepare": "is-ci || husky",
@@ -65,6 +73,7 @@
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^9.1.7",
     "is-ci": "^4.1.0",
+    "jsonc-parser": "^3.3.1",
     "lint-staged": "^17.6.0"
   },
   "lint-staged": {
