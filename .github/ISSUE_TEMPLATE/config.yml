@@ -1,0 +1,9 @@
+# Every issue starts from a form, so each arrives with what triage needs.
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/timwm/o11-idx/security/advisories/new
+    about: Report it privately, not in a public issue.
+  - name: Adjust a color for yourself
+    url: https://github.com/timwm/o11-idx#-customization
+    about: Override any theme color in your own settings.json.
