@@ -39,6 +39,7 @@
     ]
   },
   "type": "module",
+  "packageManager": "pnpm@12.16.1",
   "scripts": {
     "build": "pnpm lint && vsce package",
     "lint": "biome lint",
@@ -57,14 +58,14 @@
     "contributors:latest": "node scripts/generate-release-contributors.js --tag $(git describe --tags --abbrev=0)"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.3.5",
-    "@commitlint/cli": "^20.1.0",
-    "@commitlint/config-conventional": "^20.0.0",
-    "@vscode/vsce": "^3.7.0",
+    "@biomejs/biome": "2.6.4",
+    "@commitlint/cli": "^21.2.4",
+    "@commitlint/config-conventional": "^21.2.4",
+    "@vscode/vsce": "^4.1.0",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^9.1.7",
     "is-ci": "^4.1.0",
-    "lint-staged": "^16.2.6"
+    "lint-staged": "^17.6.0"
   },
   "lint-staged": {
     "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx}": [
