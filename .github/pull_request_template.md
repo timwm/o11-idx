@@ -1,15 +1,33 @@
-Describe your changes here.
+## Summary
 
-Closes # (type the issue number after # if applicable; otherwise remove this line)
+<!-- What this pull request changes, and why. -->
 
-### Screenshots
+Closes #
 
-Please provide before/after screenshots for any visual changes
+## Changes
 
-### Merge checklist
+<!-- The notable changes, for the reviewer. -->
 
-- [ ] Added/updated colors
-- [ ] Added/updated documentation/README
-- [ ] Other
+-
 
-Take a look at [CONTRIBUTING](https://github.com/timwm/o11-idx/blob/main/CONTRIBUTING.md) for more information on how test your changes locally.
+## Testing
+
+<!-- How it was checked: in the Extension Development Host (F5), which languages and UI areas were looked at. -->
+
+## Screenshots
+
+<!-- Color or UI changes only: before and after, of the same file at the same size. Delete this section otherwise. -->
+
+| Before | After |
+| ------ | ----- |
+|        |       |
+
+## Checklist
+
+- [ ] Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/) (`fix:`, `feat:`, ...); the next version and the release notes come from them
+- [ ] `pnpm build` passes (lint, package contents and packaging)
+- [ ] Colors were checked in the Extension Development Host, with semantic highlighting where the language has it
+- [ ] The README color palette is updated if a color it lists changed
+- [ ] `version` in `package.json` and `CHANGELOG.md` are left to the release process
+
+See [CONTRIBUTING.md](https://github.com/timwm/o11-idx/blob/main/CONTRIBUTING.md) for setting up and testing locally.

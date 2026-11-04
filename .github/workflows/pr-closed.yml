@@ -1,23 +1,27 @@
 name: 🎉 PR Closed Notification
 
 on:
-  pull_request_target:
+  # `pull_request_target` so a merged pull request from a fork can still be
+  # commented on. Safe here: nothing from the pull request is checked out or
+  # run, and its fields reach the script only as data (context.payload), never
+  # through `${{ }}` expressions.
+  pull_request_target: # zizmor: ignore[dangerous-triggers]
     types:
       - closed
 
-permissions:
-  contents: read
-  issues: write
-  pull-requests: write
+permissions: {}
 
 jobs:
   notify-on-merge:
     # Only run if the PR was merged (not just closed)
     if: github.event.pull_request.merged == true
+    permissions:
+      issues: write # PR comments go through the issues API
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - name: 💬 Thank Contributor
-        uses: actions/github-script@v8
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -26,7 +30,7 @@ jobs:
             const prNumber = pr.number;
             const prTitle = pr.title;
             const avatarUrl = pr.user.avatar_url;
-            
+
             try {              
               // Get all PRs from this author
               const { data: authorPRs } = await github.rest.search.issuesAndPullRequests({
@@ -62,7 +66,7 @@ jobs:
             } catch (error) {
               console.error(`⚠️ Could not comment on PR #${prNumber}: ${error.message}`);
             }
-            
+
             console.log('📊 Contribution Statistics:');
             console.log(`  PR: #${pr.number} - ${pr.title}`);
             console.log(`  Author: @${pr.user.login}`);

@@ -1,5 +1,9 @@
 node_modules
 *.vsix
+*.tgz
+
+# Generated on `prepack` (scripts/build-npm-theme.js)
+dist/
 
 # Generated contributor files
 release-contributors.md

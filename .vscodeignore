@@ -1,39 +1,10 @@
-# Development files
-.vscode/**
-.vscode-test/**
-.vscodeignore
-vsc-extension-quickstart.md
-
-# Git files
-.git/**
-.gitattributes
-.gitignore
-.github/**
-
-# Configuration files
-biome.json
-commitlint.config.js
-.release-please-manifest.json
-release-please-config.json
-
-# Dependencies
-node_modules/**
-pnpm-lock.yaml
-
-# Changeset files (for release management)
-.changeset/**
-.husky/**
-
-# Scripts directory (release management)
-scripts/**
-
-# Build artifacts
-*.vsix
-*.vsix.sha256
-release-contributors.md
-release-contributors.json
-release-contributors.html
-
-# Unused icon variants
-assets/**
+# The extension package is an allowlist: exclude everything, then re-include
+# what ships. vsce always adds package.json and README.md on its own.
+#
+# Not package.json "files": npm reads that field too. The npm package's
+# contents are set in .npmignore.
+**
+!themes/**
 !assets/img/icon.png
+!LICENSE
+!CHANGELOG.md

@@ -1,0 +1,39 @@
+name: Feature request
+description: Suggest a color change, support for a language, or another improvement.
+labels: [enhancement]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      multiple: true
+      options:
+        - Syntax highlighting (code colors)
+        - Editor UI (sidebar, tabs, panels, menus)
+        - Terminal
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What looks wrong or is missing today, and where.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: The colors you have in mind (as hex values) and the tokens or UI elements they are for.
+    validations:
+      required: true
+  - type: textarea
+    id: visuals
+    attributes:
+      label: Screenshots or mockups
+      description: Paste or drag images here.
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered

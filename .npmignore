@@ -1,0 +1,10 @@
+# The npm package is an allowlist: exclude everything, then re-include what
+# ships. npm always adds package.json, README.md and LICENSE on its own.
+#
+# Not package.json "files": vsce reads that field too and fails when a listed
+# path is missing, and dist/ only exists once `prepack` has run. The VS Code
+# extension's contents are set in .vscodeignore.
+*
+!dist/
+!dist/o11-idx-color-theme.json
+!CHANGELOG.md

@@ -1,0 +1,83 @@
+name: Bug report
+description: Report a color or display problem in O11 IDX.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! For a wrong syntax color, the token's scopes make it quick to fix: run **Developer: Inspect Editor Tokens and Scopes** from the Command Palette and click the token.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Syntax highlighting (code colors)
+        - Editor UI (sidebar, tabs, panels, menus)
+        - Terminal
+        - Something else
+    validations:
+      required: true
+  - type: input
+    id: language
+    attributes:
+      label: Language
+      description: For syntax highlighting, the language and the extension that provides it.
+      placeholder: TypeScript (built-in)
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: "Tell us about the problem you're running into. If possible, attach a screenshot or short video (paste or drag it here)."
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Many UI colors show only in a certain state (selection, focus, hover, diff view, ...). Include any other extension needed.
+      placeholder: |
+        1. Open a TypeScript file
+        2. Select a word
+        3. Click in the sidebar, so the editor loses focus
+  - type: textarea
+    id: sample
+    attributes:
+      label: Code sample
+      description: A few lines that show the problem.
+      render: text
+  - type: textarea
+    id: scopes
+    attributes:
+      label: Token scopes
+      description: "From **Developer: Inspect Editor Tokens and Scopes**, the TextMate scopes and, if shown, the semantic token type."
+      render: text
+  - type: input
+    id: version
+    attributes:
+      label: O11 IDX version
+      description: Shown on the extension's page in the Extensions view.
+    validations:
+      required: true
+  - type: input
+    id: editor
+    attributes:
+      label: Editor and version
+      description: From **Help > About**.
+      placeholder: VS Code 1.106.0, VSCodium, Cursor, ...
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched the existing issues, and this one is new.
+          required: true
+        - label: It still happens without my own `workbench.colorCustomizations` and `editor.tokenColorCustomizations`.
+          required: true

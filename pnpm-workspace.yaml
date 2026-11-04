@@ -1,0 +1,23 @@
+# pnpm settings for this single-package repository (no workspace packages).
+
+# Minutes. A release is installed only once three days old, the window in
+# which most compromised releases are found and pulled; Renovate keeps the same.
+# Renovate proposes security fixes at once, but pnpm still refuses a version
+# younger than this: to take one early, list it (`name@version`) under
+# `minimumReleaseAgeExclude`, and remove it once it is three days old.
+minimumReleaseAge: 4320
+
+# Dependency install scripts run only when listed here as true.
+allowBuilds:
+  # Copies the binary `vsce sign` uses; this repository never signs (the
+  # Marketplace signs on publish), and its fallback downloads from the network.
+  "@vscode/vsce-sign": false
+
+# Security fixes a parent's own range does not admit yet. Remove each once its
+# parent allows the fixed version.
+overrides:
+  # @vscode/vsce requires ^10 (GHSA-g3hv-75wg-m249). vsce only calls
+  # `minimatch(path, pattern, { dot: true })`, which 11 keeps.
+  # The minimatch@3 under commitizen > glob@7 is left as is: 3.x has no
+  # `firstPhasePreProcess`, the affected code, and glob@7 crashes with 11.
+  "@vscode/vsce>minimatch": ^11.0.1

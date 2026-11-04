@@ -2,6 +2,11 @@
   "$schema": "vscode://schemas/color-theme",
   "name": "O11 IDX",
   "type": "dark",
+  "semanticHighlighting": false,
+  "semanticTokenColors": {
+    // `const` is the norm in modern code, so it keeps the variable color and the constant color still marks real constants.
+    // "variable.readonly": "#e4b781"
+  },
   "colors": {
     "activityBar.activeBorder": "#a87ffb",
     "activityBar.background": "#000410",
