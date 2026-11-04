@@ -11,10 +11,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/timwm/O11-idx.git"
+    "url": "git+https://github.com/timwm/o11-idx.git"
   },
   "bugs": {
-    "url": "https://github.com/timwm/O11-idx/issues"
+    "url": "https://github.com/timwm/o11-idx/issues"
   },
   "homepage": "https://github.com/timwm/o11-idx#readme",
   "description": "A Beautiful VS Code Theme for Developers",
