@@ -1,0 +1,43 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  // Digest pins for actions, weekly lockfile maintenance (which reaches
+  // transitive dependencies), abandoned-package detection.
+  extends: ["config:best-practices"],
+  schedule: ["before 6am on monday"],
+  // The groups below bound how many pull requests open at once.
+  prHourlyLimit: 0,
+  labels: ["dependencies"],
+
+  // A release is not proposed until it is three days old: most compromised
+  // releases are found and pulled within that window. Security fixes are
+  // exempt, and proposed as soon as an advisory is published. pnpm keeps the
+  // same window (`minimumReleaseAge` in pnpm-workspace.yaml).
+  minimumReleaseAge: "3 days",
+  internalChecksFilter: "strict",
+  osvVulnerabilityAlerts: true,
+  vulnerabilityAlerts: {
+    labels: ["security"],
+  },
+
+  packageRules: [
+    // One pull request per ecosystem for what should not break; a major
+    // version stays on its own, for review.
+    {
+      matchManagers: ["npm"],
+      matchUpdateTypes: ["minor", "patch", "pin", "pinDigest", "digest"],
+      groupName: "npm non-major",
+    },
+    {
+      matchManagers: ["github-actions"],
+      matchUpdateTypes: ["minor", "patch", "pin", "pinDigest", "digest"],
+      groupName: "ci non-major",
+    },
+    // Node.js in CI (.node-version) and pnpm (packageManager) move together.
+    {
+      matchManagers: ["nodenv", "npm"],
+      matchDepNames: ["node", "pnpm"],
+      matchUpdateTypes: ["minor", "patch"],
+      groupName: "toolchain non-major",
+    },
+  ],
+}
