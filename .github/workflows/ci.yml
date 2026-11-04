@@ -7,6 +7,10 @@ on:
     branches:
       - main
 
+# Least privilege by default; a job asks for more on its own.
+permissions:
+  contents: read
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -14,22 +18,21 @@ concurrency:
 jobs:
   lint-and-test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [22]
     steps:
-      - uses: actions/checkout@v5
-
-      - name: 💾 Install pnpm
-        uses: pnpm/action-setup@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          version: 10
+          persist-credentials: false
+
+      # The version comes from `packageManager` in package.json.
+      - name: 💾 Install pnpm
+        uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+        with:
           run_install: false
 
-      - name: 🛠️ Set up Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v6
+      - name: 🛠️ Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version-file: .node-version
           cache: "pnpm"
 
       - name: 💾 Install dependencies
@@ -41,20 +44,38 @@ jobs:
           pnpm run version:check
         # run: pnpm test
 
+      - name: 📦 Package extension (.vsix)
+        run: pnpm build
+
   release:
     needs: lint-and-test
     if: |
-      github.repository == 'timwm/o11-idx' && 
-      github.event_name == 'push' && 
+      github.repository == 'timwm/o11-idx' &&
+      github.event_name == 'push' &&
       contains(github.ref, 'refs/heads/main') &&
-      github.actor != 'dependabot[bot]'
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
+      github.actor != 'dependabot[bot]' &&
+      github.actor != 'renovate[bot]'
+    # Holds the release app's credentials; deploys only from `main`.
+    environment: release
+    # Release PRs and releases are made with the app's token, not GITHUB_TOKEN:
+    # events from GITHUB_TOKEN start no workflow runs, so the release PR would
+    # get no CI and a release would not start publish.yml.
+    permissions: {}
 
     runs-on: ubuntu-latest
     steps:
-      - uses: googleapis/release-please-action@v4.4.0
+      - name: 🔑 Get release app token
+        id: app-token
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
         with:
-          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+          client-id: ${{ vars.RELEASE_APP_CLIENT_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+          # What release-please needs, and no more.
+          permission-contents: write
+          permission-issues: write
+          permission-pull-requests: write
+
+      - name: 🏷️ Release PR / GitHub release
+        uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
+        with:
+          token: ${{ steps.app-token.outputs.token }}
